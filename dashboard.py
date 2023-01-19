@@ -43,6 +43,7 @@ if option == 'WallStreetBets':
     st.subheader("WSB dashboard logic")
 
 if option == 'Finance News':
+    st.subheader("Trending News:")
     symbol = st.sidebar.text_input('Symbol', value='QQQ', max_chars=5)
 
     desiredSymbol = yf.Ticker(symbol)
