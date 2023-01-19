@@ -50,15 +50,25 @@ if option == 'Finance News':
 
     data =desiredSymbol.news
 
+    st.write(data)
+
     st.write('1. ' + data[0]['title'])
+    st.write( data[0]['link'])
     st.write('2. ' + data[1]['title'])
+    st.write( data[1]['link'])
     st.write('3. ' + data[2]['title'])
+    st.write( data[2]['link'])
     st.write('4. ' + data[3]['title'])
+    st.write( data[3]['link'])
     st.write('5. ' + data[4]['title'])
+    st.write( data[4]['link'])
 
     st.write('6. ' + data[5]['title'])
+    st.write( data[5]['link'])
     st.write('7. ' + data[6]['title'])
+    st.write( data[6]['link'])
     st.write('8. ' + data[7]['title'])
+    st.write( data[7]['link'])
 
  
 if option == 'Stocktwits':
