@@ -5,27 +5,15 @@ import requests
 import tweepy
 import yfinance as yf
 import json
-# st.title("This is the title")
-# st.header("this is a header")
-# st.write("this is regular text")
+import config
 
-""""""
-#header
-##subheader
-""""""
+# init tweepy api
+auth = tweepy.OAuthHandler(
+   config.TWITTER_CONSUMER_KEY, config.TWITTER_CONSUMER_SECRET
+)
+auth.set_access_token(config.TWITTER_ACCESS_TOKEN,config.TWITTER_ACCESS_TOKEN_SECRET)
+api = tweepy.API(auth)
 
-# some_dictionary = {
-#     "key":"value",
-#     "key2": "value2"
-# }
-
-# st.write(some_dictionary)
-
-# st.sidebar.title("Dashboard Options")
-
-# df = pd.DataFrame(np.random.randn(50,20), columns=('col %d' % i for i in range(20)))
-
-# st.dataframe(df)
 
 option = st.sidebar.selectbox(
     "Which dashboard would you like?", ('Twitter', 'WallStreetBets', 'Stocktwits','Chart', 'Pattern', 'Finance News')
@@ -35,6 +23,12 @@ st.header(option)
 
 if option == 'Twitter':
     st.subheader("twitter dashboard logic")
+    
+    tweets = api.user_timeline(screen_name= 'delatone')
+    st.write(tweets)
+
+
+
 
 if option == 'Chart':
     st.subheader("Chart dashboard logic")
@@ -50,7 +44,7 @@ if option == 'Finance News':
 
     data =desiredSymbol.news
 
-    st.write(data)
+    # st.write(data)
 
     st.write('1. ' + data[0]['title'])
     st.write( data[0]['link'])
