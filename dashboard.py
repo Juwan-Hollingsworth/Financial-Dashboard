@@ -7,13 +7,6 @@ import yfinance as yf
 import json
 import config
 
-# init tweepy api
-auth = tweepy.OAuthHandler(
-   config.TWITTER_CONSUMER_KEY, config.TWITTER_CONSUMER_SECRET
-)
-auth.set_access_token(config.TWITTER_ACCESS_TOKEN,config.TWITTER_ACCESS_TOKEN_SECRET)
-api = tweepy.API(auth)
-
 
 option = st.sidebar.selectbox(
     "Which dashboard would you like?", ('Twitter', 'WallStreetBets', 'Stocktwits','Chart', 'Pattern', 'Finance News')
@@ -22,10 +15,35 @@ option = st.sidebar.selectbox(
 st.header(option)
 
 if option == 'Twitter':
-    st.subheader("twitter dashboard logic")
+
+    # init tweepy api
+    auth = tweepy.OAuthHandler(
+    config.TWITTER_CONSUMER_KEY, config.TWITTER_CONSUMER_SECRET)
+    auth.set_access_token(config.TWITTER_ACCESS_TOKEN,config.TWITTER_ACCESS_TOKEN_SECRET)
+    api = tweepy.API(auth)
+
+    st.subheader("Recent tweets:")
+
+    # return data json from user
+    # screen_name = "DeItaone"
+    # count = 5
+    # statuses = api.user_timeline(screen_name, count = count)
+
+    # for status in statuses:
+    #     print(status.text, end = "\n\n")
     
-    tweets = api.user_timeline(screen_name= 'delatone')
-    st.write(tweets)
+    
+    user = api.get_user(screen_name= 'DeItaone')
+
+    user_tweets = api.user_timeline(screen_name= 'DeItaone',exclude_replies = True, include_rts = False, count = 10)
+
+
+    for tweet in user_tweets:
+        st.image(user.profile_image_url)
+        st.write("@DeltaOne")
+        st.write(tweet.text)
+
+    # st.write('1. ' + tweets[0]['title'])
 
 
 
@@ -34,11 +52,11 @@ if option == 'Chart':
     st.subheader("Chart dashboard logic")
 
 if option == 'WallStreetBets':
-    st.subheader("WSB dashboard logic")
+    st.subheader("Reddit API")
 
 if option == 'Finance News':
     st.subheader("Trending News:")
-    symbol = st.sidebar.text_input('Symbol', value='QQQ', max_chars=5)
+    symbol = st.sidebar.text_input('Symbol', value='^IXIC', max_chars=5)
 
     desiredSymbol = yf.Ticker(symbol)
 
