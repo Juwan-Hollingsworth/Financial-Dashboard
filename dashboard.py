@@ -7,9 +7,16 @@ import yfinance as yf
 import json
 import config
 
+# Final functions menu
+
+# option = st.sidebar.selectbox(
+#     "Which dashboard would you like?", ('Twitter', 'WallStreetBets', 'Stocktwits','Chart', 'Pattern', 'Finance News')
+# )
+
+# Completed functions menu
 
 option = st.sidebar.selectbox(
-    "Which dashboard would you like?", ('Twitter', 'WallStreetBets', 'Stocktwits','Chart', 'Pattern', 'Finance News')
+    "Which dashboard would you like?", ('Twitter', 'Stocktwits', 'Finance News')
 )
 
 st.header(option)
@@ -55,7 +62,7 @@ if option == 'WallStreetBets':
     st.subheader("Reddit API")
 
 if option == 'Finance News':
-    st.subheader("Trending News:")
+    st.subheader("Yahoo Trending News:")
     symbol = st.sidebar.text_input('Symbol', value='^IXIC', max_chars=5)
 
     desiredSymbol = yf.Ticker(symbol)
